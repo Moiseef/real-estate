@@ -1,0 +1,142 @@
+{% extends 'realty/base.html' %}
+
+{% block title %}News{% endblock %}
+{% block content %}
+<!--section1-->
+<section class="pt-4 pt-md-5">
+	<div class="container px-5">
+		<!-- Title -->
+		<div class="row mb-5">
+			<div class="col-12 text-center">
+				<h1 class="display-1 mb-0">The News</h1>
+			</div>
+		</div>
+
+		<!-- Blog START -->
+		<div class="row g-4">
+
+			<!-- Blog item START -->
+			    {% for el in latest_news %}
+			<div class="col-lg-6">
+				<div class="border-0 card bg-transparent mb-4 mb-sm-0">
+					<!-- Image -->
+					<div class="position-relative">
+						<img src="{{ el.news_image.url }}" class="card-img rounded" alt="">
+						<!-- Badge -->
+						<div class="card-img-overlay d-flex align-items-start flex-column p-3">
+							<a href="#" class="badge {{ el.categories }}">{{ el.categories }}</a>
+						</div>
+					</div>	
+					<!-- Card body -->
+					<div class="card-body px-3 pb-0">
+						<span><i class="bi bi-calendar2-plus me-2"></i>{{ el.date }}</span>
+
+						<!-- Title -->
+						<h3 class="card-title"><a href="{% url 'blog' el.id %}">{{ el.title }}</a></h5>
+							<h6 class="text-muted">{{ el.mutetext }}</h6>
+						<p id="mycuttext" class="mb-0">{{ el.full_text }}</p>
+
+						<!-- Author name and button -->
+						<div class="d-flex justify-content-between align-items-center mt-2">
+							<!--<h6 class="mb-0">By <a href="#">Ivan</a></h6>-->
+							<a href="{% url 'blog' el.id %}" class="btn btn-link p-0 mb-0">Read more <i class="bi bi-arrow-up-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			    {% endfor %}
+			<!-- Blog item END -->
+
+			<!-- Blog list START -->
+			<div class="col-lg-6 ps-lg-5">
+				<div class="vstack gap-4">
+					<!-- Blog item START -->
+					  {% for el in some_news %}
+					<div class="border-0 card bg-transparent">
+						<div class="row g-3 g-sm-4 align-items-sm-center">
+							<!-- Image -->
+							<div class="col-4">
+								<img src="{{ el.news_image.url }}" class="card-img rounded" alt="">
+							</div>
+							<div class="col-8">
+								<!-- card body -->
+								<div class="card-body p-0">
+									<h5 class="card-title mb-sm-3"><a href="{% url 'blog' el.id %}" class="stretched-link">{{ el.title }}</a></h5>
+									<!-- Author name and button -->
+									<div class="d-flex justify-content-between align-items-center">
+										<span class="small"><i class="bi bi-calendar2-plus me-2"></i>{{ el.date }}</span>
+										<a href="{% url 'blog' el.id %}" class="btn btn-link p-0 mb-0">Read more <i class="bi bi-arrow-up-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="my-0"> <!-- Divider -->
+					  {% endfor %}
+
+					<!-- Blog item END -->
+				</div>
+			</div>
+			<!-- Blog list END -->
+
+		</div>
+		<!-- Blog END -->
+	</div>
+</section>
+<!--section1 end-->
+<!--new greed start-->
+<section class="pt-0 pt-sm-5">
+	<div class="container">
+
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-12 text-center">
+				<h2 class="mb-0">Latest Article</h2>
+			</div>
+		</div>
+		<!--test category-->
+		<div class="select_news mt-5 mb-5">
+	<ul class="mylist nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+		<li class="mylist_item activenews px-5" data-id="all">all</li>
+		<li class="mylist_item px-5" data-id="business">business</li>
+		<li class="mylist_item px-5" data-id="events">events</li>
+		<li class="mylist_item px-5" data-id="documentation">documentation</li>
+	</ul>
+</div>
+		<!--test category end-->
+
+		<!-- Blog grid -->
+		<div class="row g-4">
+			<!-- Blog item START -->
+			{% for el in news %}
+			<div class="col-md-6 col-lg-4 myblocks_item {{ el.categories }}">
+				<div class="border-0 card bg-transparent">
+					<!-- Image -->
+					<div class="position-relative">
+						<img src="{{ el.news_image.url }}" class="card-img" alt="">
+						<!-- Badge -->
+						<div class="card-img-overlay p-3">
+							<a href="#" class="badge mb-2 {{ el.categories }}">{{ el.categories }}</a>
+						</div>
+					</div>
+
+					<!-- Card body -->
+					<div class="card-body p-3 pb-0">
+						<!-- Title -->
+						<h5 class="card-title mt-2"><a href="{% url 'blog' el.id %}">{{ el.title }}</a></h5>
+						<p id="mycuttext2">{{ el.full_text }}</p>
+						<h6 class="fw-light mb-0">{{ el.date }}</h6>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+	
+
+	</div>
+</section>
+<!--news green end-->
+
+
+{% endblock %}

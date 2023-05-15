@@ -1,0 +1,10 @@
+1. pip install --upgrade pip
+2. python3 -m venv .venv
+3. source .venv/bin/activate
+4. python3 -m pip install Django
+5. Pillow 9.5.0 (pip install Pillow)
+6. jango-crispy-forms 2.0 (pip install django-crispy-forms)
+7. crispy-bootstrap5 0.7 (pip install crispy-bootstrap5)
+8. django-multiselectfield2 0.0.1 (pip install django-multiselectfield2)
+9. django-phone-field 1.8.1 (pip install django-phone-field)
+10. python3 manage.py runserver

@@ -1,0 +1,123 @@
+{% extends 'realty/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<section class="position-relative py-8 py-sm-9 backsection">
+	<!-- Background dark overlay -->
+	<div class="bg-overlay bg-dark opacity-2"></div>
+	<div class="container z-index-9 position-relative mobsizemy">
+		<div class="row">
+			<div class="col-xl-8 m-auto text-center py-xl-8 textmobmy">
+				<h1 class="display-4 text-white mb-3">A World Of Luxury Awaits You</h1>
+				<h5 class="text-white mb-3">Discover a New Look of Luxury Resorts.</h5>
+				<a href="{% url 'contact' %}" class="btn btn-lg btn-dark mb-0">Discover More</a>
+			</div>
+		</div> <!-- Row END -->
+	</div>
+</section>
+<!--Realty block start-->
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+ <!-- card realty start-->
+          {% for el in result %}        
+        <div class="col">
+          <div class="card shadow-sm">
+            <!--slide start-->
+        <!--second slide start-->
+        <div id="{{ el.id }}" class="carousel slide" data-bs-ride="false">
+          <div class="carousel-inner">
+            {% for m in el.images.all %}   
+            <div class="carousel-item {% if forloop.counter0 == 0%} active {% endif %}">
+              <img src="{{ m.image.url }}" class="d-block w-100" alt="...">
+            </div>
+            {% endfor %}  
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#{{ el.id }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#{{ el.id }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <!--second slide end-->           
+            <!--slide end-->          
+           <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+            <div class="card-body">
+                <h2 id="mycuttext3">{{ el.title }}</h2>
+                <h4 class="text-info">Price&nbsp; {{ el.price }} &nbsp; $</h4>
+              <p id="mycuttext2" class="card-text">{{ el.full_text }}</p>
+              <ul id="listingf" class="list-inline md-mb-2 text-start">                    
+                <span><strong>Room:</strong>&nbsp;{{ el.rooms }} </span>  
+                <span><strong>Bath Rroom:</strong>&nbsp;{{ el.bath_rooms }} </span>               
+           </ul>
+              <ul id="listingf" class="list-inline md-mb-2 text-start">                    
+                 {{ el.facilities }}                  
+            </ul>
+            <!--<div class="mybtn mb-md-4">
+               <a href="#" class="btn btn-secondary">{{ el.label_btn }}<i class="bi bi-star"></i></a>
+            </div>-->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  {% if user.is_authenticated %}
+                  <a href="{% url 'views' el.id %}"><button type="button" class="btn btn-sm btn-outline-secondary me-2 ms-2">View</button></a>
+                  <a href="{% url 'views-update' el.id %}"> <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                  {% else %}
+                  <a href="{% url 'views' el.id %}"><button type="button" class="btn btn-sm btn-outline-secondary me-2 ms-2">View</button></a>
+                  {% endif %}
+                </div>
+                <small class="text-muted">{{ el.date }}</small>
+              </div>
+            </div>
+          </div>
+        </div>       
+ <!-- card realty end-->    
+          {% endfor %}     
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex justify-content-center">
+              {% if posts_of_the_page.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ posts_of_the_page.previous_page_number }}">Previous</a></li>
+              {% endif %}
+<!--test pagi-->
+              {% for l in list %}
+                  {% if l == posts_of_the_page.number %}
+              <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{l}}">{{ l }}<span class="sr-only">(current)</span></a>
+              </li>
+                  {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{l}}">{{l}}</a></li>
+                  {% endif %}
+               {% endfor %}
+<!--test pagi enf-->
+
+              {% if posts_of_the_page.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ posts_of_the_page.next_page_number }}">Next</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+
+      </div>
+    </div>
+  </div>
+<!--Realty block end-->
+<script>
+  // fix scroll
+let cords = ['scrollX','scrollY']; 
+// save the scroll position in localStorage
+window.addEventListener('unload', e => cords.forEach(cord => localStorage[cord] = window[cord])); 
+// hang event on page load
+window.addEventListener('load', e => {
+    // if there is data in localStorage
+    if (localStorage[cords[0]]) {
+        // scroll to saved coordinates
+        window.scroll(...cords.map(cord => localStorage[cord]));
+        // delete data from localStorage
+        cords.forEach(cord => localStorage.removeItem(cord));
+    }
+}); 
+</script>
+<!--secont t-->
+{% endblock %}

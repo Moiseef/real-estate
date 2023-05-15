@@ -1,0 +1,56 @@
+<footer class="bd-footer py-2 mb-0 mt-5 bg-light">
+    <div class="container py-2">
+      <div class="row">
+        <div class="col-lg-3 mb-3">
+          <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/">
+            <img src="/media/images/images/logo_bxfengf.png" alt="logo" class="logo">              
+          </a>
+          <ul class="list-unstyled small text-muted">
+            <li class="mb-2">Final project for Harvard <a href="https://www.edx.org/cs50">CS50’s Web Programming with Python and JavaScript</a>.</li>
+            <li class="mb-2">Lorem Ipsum is simply dummy text of the printing</li>
+            <li class="mb-2">and typesetting industry.</li>
+            <li class="mb-2">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+          <h5>Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="{% url 'home' %}">Home</a></li>
+            <li class="mb-2"><a href="{% url 'about' %}">About</a></li>
+            <li class="mb-2"><a href="{% url 'realty' %}">Realty</a></li>
+            <li class="mb-2"><a href="{% url 'contact' %}">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Identification</h5>
+          <ul class="list-unstyled">
+            {% if user.is_authenticated %}
+            <li class="mb-2"><a href="{% url 'create' %}">Add object</a></li>
+            <li class="mb-2"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li class="mb-2"><a href="{% url 'login' %}">Login</a></li>
+            <li class="mb-2"><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Technologies</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="https://getbootstrap.com/">Bootstrap 5</a></li>
+            <li class="mb-2"><a href="https://www.djangoproject.com/">Django</a></li>
+            <li class="mb-2"><a href="https://pypi.org/project/pip/">Pypi</a></li>
+            <li class="mb-2"><a href="https://github.com/">GIThub</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2 mb-3">
+          <h5>Community</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="{% url 'news' %}">News</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div id="backTop" style="display: none;" class="back-top back-top-show"></div>
+</body>
+</html>

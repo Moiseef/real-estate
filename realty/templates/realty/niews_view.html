@@ -1,0 +1,42 @@
+{% extends 'realty/base.html' %}
+{% block title %}{{ realty.title }}{% endblock %}
+{% block content %}
+
+<!--content new-->
+<section class="py-0 margsec">
+	<div class="container">
+		<!-- Title -->
+		<div class="row g-4">
+			<!-- Image -->
+			<div class="col-12 mywrapeimg">
+               
+				<img src="{{ realty_news.news_image.url  }}" class="rounded newsphot" alt="">
+            
+			</div>
+			<!-- Title and content -->
+			<div class="col-11 col-lg-10 mx-auto position-relative descard">
+				<div class="bg-light bg-success shadow rounded-pill p-4 text-center mybadgenews" style="--bs-bg-opacity: .5;">
+					<!-- Badge -->
+					<div class="rounded-pill badge {{ realty_news.categories }} mb-2">{{ realty_news.categories }}</div>
+					<!-- Title -->
+					<h1 class="fs-3">{{ realty_news.title }}</h1>
+					<p class="mb-2 text-muted">{{ realty_news.mutetext }}</p>			
+					<p class="mb-2 text-info">{{ realty_news.date }}</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <p class="myfirstlet">{{ realty_news.full_text }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--content new end-->
+
+{% endblock %}
